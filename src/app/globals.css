@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
+/* Brand: #0d61a6 blue, #14bdb7 teal, #21262b ink, #d2d6dc mist, #f9fafb paper.
+   Navy is a deep shade of the brand blue, used for the dark bands. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f6f7f8;
+  --card: #eceff2;
+  --fg: #21262b;
+  --fg-2: #66707a;
+  --line: #d9dde2;
+  --navy: #0a2d4d;
+  --accent: #14bdb7;
+  --blue: #0d61a6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-accent: var(--accent);
+  --color-blue: var(--blue);
+  --color-paper: #f9fafb;
+  --color-ink: #21262b;
+  --color-mist: #d2d6dc;
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-jbm);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
+  color: var(--fg);
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  font-weight: 500;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+::selection { background: var(--accent); color: var(--fg); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@keyframes flow { to { stroke-dashoffset: -100; } }
+.route-flow { animation: flow 6s linear infinite; }
+
+@keyframes ripple { from { transform: translate(-50%, -50%) scale(0.15); opacity: 0.9; } to { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
+.ripple { animation: ripple 8s cubic-bezier(0.2, 0.6, 0.3, 1) infinite; }
+
+@keyframes travel { from { left: 0%; } to { left: calc(100% - 11px); } }
+.travel { animation: travel 2.2s cubic-bezier(0.6, 0, 0.4, 1) infinite; }
+
+@keyframes fadein { from { opacity: 0; transform: translateY(4px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
